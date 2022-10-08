@@ -1,0 +1,28 @@
+﻿@page "/pull-down"
+@layout H5Layout
+@inject IJSRuntime js
+
+<BcdLib.Components.PullDown OnLoading="OnLoading">
+
+    <div style="user-select: none;">
+        pull down Refresh times @count
+    </div>
+
+</BcdLib.Components.PullDown>
+
+
+@code {
+    int count = 0;
+    public async Task OnLoading()
+    {
+        count++;
+        await Task.Delay(1000);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await js.InvokeVoidAsync("loadTouchEmulator");
+        }
+    }
+}

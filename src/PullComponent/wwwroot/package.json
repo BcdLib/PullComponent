@@ -1,0 +1,16 @@
+{
+  "name": "bcdlib.components",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --config vite.config.js --mode development",
+    "build": "vite build --config vite.config.js --mode production"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.3",
+    "sass": "^1.55.0",
+    "typescript": "^4.8.4",
+    "vite": "^3.1.6"
+  }
+}
