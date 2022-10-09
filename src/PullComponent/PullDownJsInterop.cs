@@ -3,26 +3,20 @@ using Microsoft.JSInterop;
 namespace BcdLib.Components;
 
 
-public class PullDownJsInterop : IAsyncDisposable
+public class DocumentJsInterop : IAsyncDisposable
 {
     private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
-    public PullDownJsInterop(IJSRuntime jsRuntime)
+    public DocumentJsInterop(IJSRuntime jsRuntime)
     {
         moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "/_content/BcdLib.PullComponent/dist/PullRefresh.js").AsTask());
-    }
-
-    public async ValueTask<string> InitAsync(string elementSelector, DotNetObjectReference<PullDown> objRef)
-    {
-        var module = await moduleTask.Value;
-        return await module.InvokeAsync<string>("PullRefresh.init", elementSelector, objRef);
+            "import", "/_content/BcdLib.PullComponent/dist/index.js").AsTask());
     }
 
     public async ValueTask<int> GetScrollTopAsync()
     {
         var module = await moduleTask.Value;
-        return await module.InvokeAsync<int>("PullRefresh.getScrollTop");
+        return await module.InvokeAsync<int>("Document.getScrollTop");
     }
 
 

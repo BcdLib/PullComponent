@@ -2,7 +2,7 @@
 
 // 文件入口，input file
 const entryFileNames = {
-    PullRefresh: './src/PullRefresh.ts',
+    index: './src/index.ts',
 }
 
 export default defineConfig(({ command, mode }) => {
@@ -54,6 +54,9 @@ export default defineConfig(({ command, mode }) => {
                     // 资源文件打包变量名， 默认值："assets/[name]-[hash][extname]"
                     assetFileNames: (fileInfo) => {
                         console.log("assetFileNames", fileInfo);
+                        if (fileInfo.name == 'style.css'){
+                            return 'index.css';
+                        }
                         const fileName = fileInfo.name;
                         // js 是entry，所以这里不会生效
                         if (fileName.endsWith('.js') || fileName.endsWith('.ts')) {
