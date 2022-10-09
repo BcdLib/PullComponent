@@ -72,18 +72,6 @@ public partial class PullDown
         };
     }
 
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            _scrollTop = await DocumentJs.GetScrollTopAsync();
-        }
-        await base.OnAfterRenderAsync(firstRender);
-    }
-
-
-
     private double startY = 0;
     private int moveDistance = 0;
     private string wrapperStyle = "";
@@ -102,14 +90,14 @@ public partial class PullDown
         }
     }
 
-    private int _scrollTop = 0;
 
-    private void OnTouchMove(TouchEventArgs e)
+    private async Task OnTouchMove(TouchEventArgs e)
     {
         if (this.pullStatus == PullStatus.Pulling || this.pullStatus == PullStatus.Loosing)
         {
             // If document is a scroll bar, touch sliding is a simple way to scroll up and down the page
-            if (_scrollTop > 0)
+            var distToTop = await DocumentJs.GetScrollTopAsync();
+            if (distToTop > 0)
             {
                 return;
             }
