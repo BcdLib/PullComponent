@@ -37,7 +37,7 @@ A blazor pull refresh component library for maui.
 
 # 2. Gif
 
-![](https://github.com/BcdLib/PullComponent/.assets/README/PullDown.gif)
+![](https://github.com/BcdLib/PullComponent/blob/main/.assets/README/PullDown.gif)
 
 # 3. Design
 
