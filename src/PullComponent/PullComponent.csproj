@@ -8,7 +8,7 @@
 		<!--$(MSBuildProjectName)-->
 		<AssemblyName>BcdLib.PullComponent</AssemblyName>
 
-		<Version>0.0.2</Version>
+		<Version>0.1.0</Version>
 		<PackageId>BcdLib.PullComponent</PackageId>
 		<Authors>zxyao</Authors>
 		<PackageTags>blazor;maui;pull refresh;</PackageTags>
