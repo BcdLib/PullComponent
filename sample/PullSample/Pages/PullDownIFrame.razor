@@ -1,19 +1,20 @@
 ﻿@page "/pull-down"
 @layout H5Layout
 @inject IJSRuntime js
+@using BcdLib.Components;
 
-<BcdLib.Components.PullDown OnLoading="OnLoading">
+<PullDown OnRefreshing="OnRefresh">
 
     <div style="user-select: none; height: 2000px;">
         pull down Refresh times @count
     </div>
 
-</BcdLib.Components.PullDown>
+</PullDown>
 
 
 @code {
     int count = 0;
-    public async Task OnLoading()
+    public async Task OnRefresh()
     {
         count++;
         await Task.Delay(1000);

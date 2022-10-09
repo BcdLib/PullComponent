@@ -7,6 +7,16 @@
 		<RootNamespace>BcdLib.Components</RootNamespace>
 		<!--$(MSBuildProjectName)-->
 		<AssemblyName>BcdLib.PullComponent</AssemblyName>
+
+		<Version>0.0.1</Version>
+		<PackageId>BcdLib.PullComponent</PackageId>
+		<Authors>zxyao</Authors>
+		<PackageTags>blazor;maui;pull refresh;</PackageTags>
+		<Company></Company>
+		<RepositoryUrl>https://github.com/BcdLib/PullComponent</RepositoryUrl>
+		<Description>
+			a blazor pull refresh component library for maui.
+		</Description>
 	</PropertyGroup>
 
 
@@ -17,5 +27,19 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
 	</ItemGroup>
+	
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DefaultItemExcludes>
+			$(DefaultItemExcludes);
+			wwwroot\src\**;
+			wwwroot\package.json;
+			wwwroot\package-lock.json;
+			wwwroot\tsconfig.json;
+			wwwroot\vite.config.js;
+		</DefaultItemExcludes>
+	</PropertyGroup>
 
+	<Target Name="RunGulp" BeforeTargets="Build">
+		<Exec WorkingDirectory="wwwroot" Command="npm run build" />
+	</Target>
 </Project>

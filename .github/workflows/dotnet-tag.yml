@@ -1,0 +1,43 @@
+name: .NET
+
+on:
+  push:
+    tags:
+      - '*'
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Setup NodeJs
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Npm install
+      run: cd BQuery/wwwroot/ && npm install
+      
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      
+    - name: Package
+      run: dotnet pack BQuery/BQuery.csproj --configuration Release --output "./.packages/"
+    
+    - name: Publish 
+      run: dotnet nuget push ./.packages/*.nupkg --api-key ${{secrets.PUBLISHKEY}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+

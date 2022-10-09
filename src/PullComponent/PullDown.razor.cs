@@ -18,7 +18,7 @@ public partial class PullDown
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public EventCallback OnLoading { get; set; }
+    public EventCallback OnRefreshing { get; set; }
 
     [Parameter]
     public RenderFragment PullingTip { get; set; } = builder =>
@@ -131,9 +131,17 @@ public partial class PullDown
 
             #region This part cannot be placed in SetPullStatus, otherwise async will lead to state confusion
 
-            if (OnLoading.HasDelegate)
+            if (OnRefreshing.HasDelegate)
             {
-                await OnLoading.InvokeAsync();
+                try
+                {
+                    await OnRefreshing.InvokeAsync();
+                }
+                catch (Exception)
+                {
+                    this.SetDistance(-1);
+                    throw;
+                }
             }
 #if DEBUG
             else
