@@ -8,7 +8,7 @@
 		<!--$(MSBuildProjectName)-->
 		<AssemblyName>BcdLib.PullComponent</AssemblyName>
 
-		<Version>0.0.1</Version>
+		<Version>0.0.2</Version>
 		<PackageId>BcdLib.PullComponent</PackageId>
 		<Authors>zxyao</Authors>
 		<PackageTags>blazor;maui;pull refresh;</PackageTags>
@@ -17,7 +17,15 @@
 		<Description>
 			a blazor pull refresh component library for maui.
 		</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
 
 	<ItemGroup>
