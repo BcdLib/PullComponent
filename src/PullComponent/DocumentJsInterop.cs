@@ -20,6 +20,14 @@ public class DocumentJsInterop : IAsyncDisposable
     }
 
 
+    public async ValueTask<int> GetScrollDistToBottomAsync()
+    {
+        var module = await moduleTask.Value;
+        return await module.InvokeAsync<int>("Document.getScrollDistToBottom");
+    }
+    
+
+
     public async ValueTask DisposeAsync()
     {
         if (moduleTask.IsValueCreated)

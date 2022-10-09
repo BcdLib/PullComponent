@@ -49,15 +49,15 @@ public partial class PullDown
     
     #endregion
 
-    private PullStatus pullStatus = PullStatus.Awaiting;
+    private PullDownStatus pullStatus = PullDownStatus.Awaiting;
 
     private RenderFragment GetTipHtml()
     {
         var renderFragment = pullStatus switch
         {
-            PullStatus.Loosing => LoosingTip,
-            PullStatus.Loading => LoadingTip,
-            PullStatus.Completed => CompletedTip,
+            PullDownStatus.Loosing => LoosingTip,
+            PullDownStatus.Loading => LoadingTip,
+            PullDownStatus.Completed => CompletedTip,
             _ => PullingTip,
         };
         return renderFragment;
@@ -67,7 +67,7 @@ public partial class PullDown
     {
         return pullStatus switch
         {
-            PullStatus.Awaiting => "",
+            PullDownStatus.Awaiting => "",
             _ => wrapperStyle,
         };
     }
@@ -78,11 +78,11 @@ public partial class PullDown
     
     private void OnTouchStart(TouchEventArgs e)
     {
-        if (this.pullStatus == PullStatus.Awaiting
-            || this.pullStatus == PullStatus.Completed
+        if (this.pullStatus == PullDownStatus.Awaiting
+            || this.pullStatus == PullDownStatus.Completed
         )
         {
-            this.SetPullStatus(PullStatus.Pulling);
+            this.SetPullStatus(PullDownStatus.Pulling);
             // 获取初始y轴位置
             this.startY = e.TargetTouches[0].ClientY;
             // 触摸开始时，动画时间，移动距离归0
@@ -93,7 +93,7 @@ public partial class PullDown
 
     private async Task OnTouchMove(TouchEventArgs e)
     {
-        if (this.pullStatus == PullStatus.Pulling || this.pullStatus == PullStatus.Loosing)
+        if (this.pullStatus == PullDownStatus.Pulling || this.pullStatus == PullDownStatus.Loosing)
         {
             // If document is a scroll bar, touch sliding is a simple way to scroll up and down the page
             var distToTop = await DocumentJs.GetScrollTopAsync();
@@ -113,9 +113,9 @@ public partial class PullDown
 
     private async Task OnTouchEnd(TouchEventArgs e)
     {
-        if (this.pullStatus == PullStatus.Loosing)
+        if (this.pullStatus == PullDownStatus.Loosing)
         {
-            this.SetPullStatus(PullStatus.Loading);
+            this.SetPullStatus(PullDownStatus.Loading);
 
             #region This part cannot be placed in SetPullStatus, otherwise async will lead to state confusion
 
@@ -140,11 +140,11 @@ public partial class PullDown
             #endregion
 
 
-            this.SetPullStatus(PullStatus.Completed);
+            this.SetPullStatus(PullDownStatus.Completed);
             await Task.Delay(800);
             this.SetDistance(-1);
         }
-        else if (this.pullStatus == PullStatus.Awaiting || this.pullStatus == PullStatus.Pulling)
+        else if (this.pullStatus == PullDownStatus.Awaiting || this.pullStatus == PullDownStatus.Pulling)
         {
             this.SetDistance(-1);
         }
@@ -160,7 +160,7 @@ public partial class PullDown
     {
         if (moveDist < 0)
         {
-            this.SetPullStatus(PullStatus.Awaiting);
+            this.SetPullStatus(PullDownStatus.Awaiting);
             this.moveDistance = 0;
             wrapperStyle = "";
             StateHasChanged();
@@ -169,11 +169,11 @@ public partial class PullDown
         {
             if (moveDist < MaxDistance)
             {
-                this.SetPullStatus(PullStatus.Pulling);
+                this.SetPullStatus(PullDownStatus.Pulling);
             }
             else
             {
-                this.SetPullStatus(PullStatus.Loosing);
+                this.SetPullStatus(PullDownStatus.Loosing);
                 moveDist = MaxDistance;
             }
             if (this.moveDistance != moveDist)
@@ -185,7 +185,7 @@ public partial class PullDown
         }
     }
 
-    private void SetPullStatus(PullStatus newPullStatus)
+    private void SetPullStatus(PullDownStatus newPullStatus)
     {
         if (this.pullStatus != newPullStatus)
         {

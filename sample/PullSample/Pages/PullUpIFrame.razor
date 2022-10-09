@@ -1,0 +1,39 @@
+﻿@page "/pull-up"
+@layout H5Layout
+@inject IJSRuntime js
+@using BcdLib.Components;
+
+<PullUp OnRefreshing="OnRefresh">
+
+    <div style="user-select: none; min-height: 1000px; display:flex; flex-direction:column; align-items: flex-end">
+        pull up Refresh times @count
+
+        @for (int i = 0; i < count; i++)
+        {
+            <h1 @key="i">item @i</h1>
+        }
+    </div>
+
+</PullUp>
+
+
+@code {
+    int count = 10;
+    public async Task<bool> OnRefresh()
+    {
+        if (count < 100)
+        {
+            await Task.Delay(1000);
+            count += 10;
+            return true;
+        }
+        return false;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await js.InvokeVoidAsync("loadTouchEmulator");
+        }
+    }
+}

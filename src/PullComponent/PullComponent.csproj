@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -8,7 +8,7 @@
 		<!--$(MSBuildProjectName)-->
 		<AssemblyName>BcdLib.PullComponent</AssemblyName>
 
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<PackageId>BcdLib.PullComponent</PackageId>
 		<Authors>zxyao</Authors>
 		<PackageTags>blazor;maui;pull refresh;</PackageTags>
@@ -21,10 +21,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 
@@ -35,7 +35,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
 	</ItemGroup>
-	
+
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<DefaultItemExcludes>
 			$(DefaultItemExcludes);
@@ -45,9 +45,9 @@
 			wwwroot\tsconfig.json;
 			wwwroot\vite.config.js;
 		</DefaultItemExcludes>
-	</PropertyGroup>
 
-	<Target Name="RunGulp" BeforeTargets="Build">
+	</PropertyGroup>
+	<Target Name="RunGulp" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Release' ">
 		<Exec WorkingDirectory="wwwroot" Command="npm run build" />
 	</Target>
 </Project>

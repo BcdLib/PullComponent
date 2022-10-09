@@ -41,9 +41,9 @@ A blazor pull refresh component library for maui.
 
 # 3. Design
 
-## 3.1.Pull Status
+## 3.1.Pull Down Status
 
-PullStatus enum has 5 status:
+PullDownStatus enum has 5 status:
 
 | enum value | describe                                                     |
 | ---------- | ------------------------------------------------------------ |
@@ -53,7 +53,7 @@ PullStatus enum has 5 status:
 | Loading    | After reaching the Loosing state, and finger has been release from the screen. The `OnRefreshing` event will be invoked. |
 | Completed  | refresh completed.                                           |
 
-State transition of PullStatus:
+State transition of PullDownStatus:
 
 - `Awaiting --> Pulling --> Loosing --> Loading --> Completed --> Awaiting `
 - `Awaiting --> Pulling --> Awaiting `
@@ -63,10 +63,10 @@ State transition of PullStatus:
 | paramter     | type           | default   | remark                                                       |
 | ------------ | -------------- | --------- | ------------------------------------------------------------ |
 | OnRefreshing | EventCallback  | --        | Pull down for callback when refreshing.                      |
-| PullingTip   | RenderFragment | 下拉刷新  | Dom displayed when in PullStatus.Pulling                     |
-| LoosingTip   | RenderFragment | 释放更新  | Dom displayed when in PullStatus.Loosing                     |
-| LoadingTip   | RenderFragment | 更新中... | Dom displayed when in PullStatus.Loading                     |
-| CompletedTip | RenderFragment | 更新完成  | Dom displayed when in PullStatus.Completed                   |
+| PullingTip   | RenderFragment | 下拉刷新  | Dom displayed when in PullDownStatus.Pulling                 |
+| LoosingTip   | RenderFragment | 释放更新  | Dom displayed when in PullDownStatus.Loosing                 |
+| LoadingTip   | RenderFragment | 更新中... | Dom displayed when in PullDownStatus.Loading                 |
+| CompletedTip | RenderFragment | 更新完成  | Dom displayed when in PullDownStatus.Completed               |
 | MaxDistance  | int            | 50        | Unit px.<br />To modify this value, you need to define the css variable  `--pull-refresh-head-height` too |
 
 # 4.Developer

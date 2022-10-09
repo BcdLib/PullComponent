@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BcdLib.Components
 {
-    public enum PullStatus
+    public enum PullDownStatus
     {
         /// <summary>
         /// 未开始
@@ -28,5 +28,27 @@ namespace BcdLib.Components
         /// 刷新完成
         /// </summary>
         Completed = 4, 
+    }
+
+
+    public enum PullUpStatus
+    {
+        /// <summary>
+        /// 未开始
+        /// </summary>
+        Awaiting = 0,
+        /// <summary>
+        /// 已经松手，正在刷新
+        /// </summary>
+        Loading = 3,
+        /// <summary>
+        /// 刷新完成
+        /// </summary>
+        Completed = 4,
+
+        /// <summary>
+        /// 全部加载完成
+        /// </summary>
+        Failed = 5,
     }
 }

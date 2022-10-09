@@ -1,7 +1,10 @@
 ﻿.pull-container {
     display: flex;
     flex-direction: column;
-    flex-grow:1;
+    flex-grow: 1;
+    > .pull-wrapper{
+        position: relative;
+    }
 }
 
 .pull-tip {
@@ -11,8 +14,14 @@
     background-color: #eeeff3;
     color: #999;
     padding: 0.5rem;
-    transform: translateY(-100%);
     height: var(--pull-refresh-head-height, 50px);
-    position: absolute;
     width: 100%;
+}
+
+.pull-down-tip {
+    position: absolute;
+    transform: translateY(-100%);
+}
+
+.pull-up-tip {
 }
