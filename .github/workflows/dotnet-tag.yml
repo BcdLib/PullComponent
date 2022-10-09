@@ -24,7 +24,7 @@ jobs:
         node-version: 16
 
     - name: Npm install
-      run: cd BQuery/wwwroot/ && npm install
+      run: cd src/PullComponent/wwwroot/ && npm install
       
     - name: Restore dependencies
       run: dotnet restore
@@ -36,7 +36,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       
     - name: Package
-      run: dotnet pack BQuery/BQuery.csproj --configuration Release --output "./.packages/"
+      run: dotnet pack src/PullComponent/PullComponent.csproj --configuration Release --output "./.packages/"
     
     - name: Publish 
       run: dotnet nuget push ./.packages/*.nupkg --api-key ${{secrets.PUBLISHKEY}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
