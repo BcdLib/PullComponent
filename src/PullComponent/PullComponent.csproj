@@ -8,7 +8,7 @@
 		<!--$(MSBuildProjectName)-->
 		<AssemblyName>BcdLib.PullComponent</AssemblyName>
 
-		<Version>0.3.0</Version>
+		<Version>0.4.0</Version>
 		<PackageId>BcdLib.PullComponent</PackageId>
 		<Authors>zxyao</Authors>
 		<PackageTags>blazor;maui;pull refresh;</PackageTags>
@@ -36,6 +36,10 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Folder Include="wwwroot\" />
+	</ItemGroup>
+
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<DefaultItemExcludes>
 			$(DefaultItemExcludes);
@@ -45,9 +49,13 @@
 			wwwroot\tsconfig.json;
 			wwwroot\vite.config.js;
 		</DefaultItemExcludes>
-
 	</PropertyGroup>
+	
 	<Target Name="RunGulp" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Release' ">
 		<Exec WorkingDirectory="wwwroot" Command="npm run build" />
+
+		<ItemGroup>
+			<None Include="wwwroot\dist\**" />
+		</ItemGroup>
 	</Target>
 </Project>
