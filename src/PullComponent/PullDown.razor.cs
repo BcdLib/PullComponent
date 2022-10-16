@@ -96,7 +96,7 @@ public partial class PullDown
         if (this.pullStatus == PullDownStatus.Pulling || this.pullStatus == PullDownStatus.Loosing)
         {
             // If document is a scroll bar, touch sliding is a simple way to scroll up and down the page
-            var distToTop = await DocumentJs.GetScrollTopAsync();
+            var distToTop = await DocumentJs.GetScrollDistToTopAsync();
             if (distToTop > 0)
             {
                 return;

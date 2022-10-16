@@ -13,10 +13,10 @@ public class DocumentJsInterop : IAsyncDisposable
             "import", "/_content/BcdLib.PullComponent/dist/index.js").AsTask());
     }
 
-    public async ValueTask<int> GetScrollTopAsync()
+    public async ValueTask<int> GetScrollDistToTopAsync()
     {
         var module = await moduleTask.Value;
-        return await module.InvokeAsync<int>("Document.getScrollTop");
+        return await module.InvokeAsync<int>("Document.getScrollDistToTop");
     }
 
 
